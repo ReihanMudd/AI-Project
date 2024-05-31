@@ -2,22 +2,14 @@ from requests_html import HTMLSession
 import pandas as pd
 from tqdm import tqdm
 
-import pathlib
-import textwrap
 import google.generativeai as genai
-from IPython.display import display
-from IPython.display import Markdown
 
 s = HTMLSession()
 
 data = []
 
-def to_markdown(text):
-  text = text.replace('•', '  *')
-  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
-
 def basic():
-    url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=laptop&_sacat=0&_odkw=laptops&_osacat=0"
+    url = input("Enter your link: ")
     r = s.get(url)
     content = r.html.find('li.s-item')
     for item in tqdm(content):
@@ -81,12 +73,8 @@ def keyworded():
         df = pd.DataFrame(data, columns=['Title', 'Sub Title', 'Price', 'Discount Price', 'Shipping Price', 'Shipping From', 'URL'])
         df.to_csv(f'{keyword}.csv', index=False, mode='a', header=False)
         data.clear()
-"""
+"""""
 
-GOOGLE_API_KEY=userdata.get('GOOGLE_API_KEY')
 
-genai.configure(api_key=GOOGLE_API_KEY)
-
-print("Please choose whether you want to create your spreadsheet by keyword or not")
-
+genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
 basic()
