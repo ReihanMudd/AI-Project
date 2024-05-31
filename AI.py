@@ -1,6 +1,6 @@
 import os
 import google.generativeai as genai
-from Tester import combined_data
+# from Tester import combined_data
 
 genai.configure(api_key=["AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg"])
 
@@ -91,14 +91,21 @@ chat_session = model.start_chat(
 
 def get_response(input_text):
   response = chat_session.send_message(input_text)
-  
   print(response.text)
 
-response = genai.generate_text(
-    model="gemini-pro",
-    prompt=f"Here is a pandas dataframe:\n\n{combined_data}\n\nAnalyze and summarize this data:",
-    temperature=0.7,
-    max_output_tokens=500
-)
+def do(combined_data=""):
 
-print(response.result)
+  # response = genai.generate_text(
+  #     model="gemini-1.5-pro",
+  #     prompt=f"Here is a pandas dataframe:\n\n{combined_data}\n\nAnalyze and summarize this data:",
+  #     temperature=0.7
+  #     # max_output_tokens=500
+  #     )
+  
+  # response = chat_session.send_message(
+  #     f"Here is a pandas dataframe:\n\n{combined_data}\n\nAnalyze and summarize this data:")
+  response = chat_session.send_message(
+      f"Here is a csv:\n\n{combined_data}\n\nImagine you are a salesman and you are selling items from a shop that has this inventory. The user's question is '{input()}'")
+
+
+  print(response.text)

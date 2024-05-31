@@ -8,10 +8,11 @@ from AI import *
 s = HTMLSession()
 
 data = []
+d="this is the data:\n"
 
 
 def keyworded(keyword):
-    urls = ['https://www.ebay.com/sch/i.html?_from=R40&_nkw={}&_sacat=0&_pgn={}'.format(keyword, x) for x in range(1,10)]
+    urls = ['https://www.ebay.com/sch/i.html?_from=R40&_nkw={}&_sacat=0&_pgn={}'.format(keyword, x) for x in range(1,5)]
     for url in tqdm(urls):
         r = s.get(url)
         content = r.html.find('li.s-item')
@@ -37,47 +38,50 @@ def keyworded(keyword):
             url_element = item.find('a.s-item__link', first=True)
             url = url_element.attrs['href'] if url_element else ''
 
-            data.append([title, subtitle, price, discountprice, shippingprice, shippingfrom, url])
+            # data.append([title, subtitle, price, discountprice, shippingprice, shippingfrom, url])
+            d+=f"title of item: {title}\tprice of item {price}\tthe url is '{url}'"
 
-        df = pd.DataFrame(data, columns=['Title', 'Sub Title', 'Price', 'Discount Price', 'Shipping Price', 'Shipping From', 'URL'])
-        df.to_csv(f'{keyword}.csv', index=False, mode='a', header=False)
-        data.clear()
+        # df = pd.DataFrame(data, columns=['Title', 'Sub Title', 'Price', 'Discount Price', 'Shipping Price', 'Shipping From', 'URL'])
+        # df.to_csv(f'{keyword}.csv', index=False, mode='a', header=False)
+        # data.clear()
 
 def main():
     genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
     model = genai.GenerativeModel('gemini-1.5-pro')
 
-    trendy = ['iphone', 'samsung', 'sony', 'lg', 'laptop', 'jordans', 'playstation', 'xbox', 'console', 'headphones', 'airpods', 'phone', 'shoes', 'gucci', 'designer', 'tv', 'coach', 'louis Vuitton', 'nike', 'accessories', 'watch', 'purse', 'wallet', 'sunglasses', 'phone case', 'earbuds', 'speaker', 'camera']
-
+    trendy = ['iphone', 'samsung']
     # Create a folder to store the combined CSV file
     output_folder = os.path.join(os.getcwd(), 'output_data')
     os.makedirs(output_folder, exist_ok=True)
 
-    # Initialize an empty DataFrame to store the combined data
-    combined_data = pd.DataFrame()
+    # # Initialize an empty DataFrame to store the combined data
+    # combined_data = pd.DataFrame()
 
-    for keyword in trendy:
-        keyworded(keyword)
+    # for keyword in trendy:
+    #     keyworded(keyword)
         
-        #I don't know how to fix it because it should work
+    #     #I don't know how to fix it because it should work
        
-        # Read the CSV file for the current keyword
-        csv_file = f'{keyword}.csv'
-        if os.path.exists(csv_file):
-            df = pd.read_csv(csv_file, sep=";")
+    #     # Read the CSV file for the current keyword
+    #     csv_file = f'{keyword}.csv'
+    #     if os.path.exists(csv_file):
+    #         df = pd.read_csv(csv_file, sep=";")
             
-            # Append the data to the combined DataFrame
-            combined_data = pd.concat([combined_data, df], ignore_index=True)
+    #         # Append the data to the combined DataFrame
+    #         combined_data = pd.concat([combined_data, df], ignore_index=True)
             
-            # Delete the individual CSV file
-            os.remove(csv_file)
+    #         # Delete the individual CSV file
+    #         os.remove(csv_file)
 
-    # Save the combined DataFrame to a CSV file in the output folder
-    output_file = os.path.join(output_folder, 'combined_data.csv')
-    combined_data.to_csv(output_file, index=False)
+    # # Save the combined DataFrame to a CSV file in the output folder
+    # output_file = os.path.join(output_folder, 'combined_data.csv')
+    # combined_data.to_csv(output_file, index=False)
 
     print("Welcome to the awesome interactive EBAY shop!")
 
-    get_response("Who are you?")
+    # get_response("Who are you?")
+    print(d)
+    while 1:
+        do(d)
 
-main()
+main() 
