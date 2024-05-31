@@ -88,7 +88,8 @@ chat_session = model.start_chat(
   ]
 )
 
-response = chat_session.send_message("INSERT_INPUT_HERE")
-
-print(response.text)
+def get_response(input_text):
+  response = chat_session.send_message(input_text)
+  
+  print(response.text)
 

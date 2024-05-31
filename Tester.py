@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 import google.generativeai as genai
 import os
-import AI
+from AI import *
 
 s = HTMLSession()
 
@@ -43,37 +43,39 @@ def keyworded(keyword):
         df.to_csv(f'{keyword}.csv', index=False, mode='a', header=False)
         data.clear()
 
+def main():
+    genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
+    model = genai.GenerativeModel('gemini-1.5-pro')
 
-genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
-model = genai.GenerativeModel('gemini-1.5-pro')
+    trendy = ['iphone', 'samsung', 'sony', 'lg', 'laptop', 'jordans', 'playstation', 'xbox', 'console', 'headphones', 'airpods', 'phone', 'shoes', 'gucci', 'designer', 'tv', 'coach', 'louis Vuitton', 'nike', 'accessories', 'watch', 'purse', 'wallet', 'sunglasses', 'phone case', 'earbuds', 'speaker', 'camera']
 
-trendy = ['iphone', 'samsung', 'sony', 'lg', 'laptop', 'jordans', 'playstation', 'xbox', 'console', 'headphones', 'airpods', 'phone', 'shoes', 'gucci', 'designer', 'tv', 'coach', 'louis Vuitton', 'nike', 'accessories', 'watch', 'purse', 'wallet', 'sunglasses', 'phone case', 'earbuds', 'speaker', 'camera']
+    # Create a folder to store the combined CSV file
+    output_folder = os.path.join(os.getcwd(), 'output_data')
+    os.makedirs(output_folder, exist_ok=True)
 
-# Create a folder to store the combined CSV file
-output_folder = os.path.join(os.getcwd(), 'output_data')
-os.makedirs(output_folder, exist_ok=True)
+    # Initialize an empty DataFrame to store the combined data
+    combined_data = pd.DataFrame()
 
-# Initialize an empty DataFrame to store the combined data
-combined_data = pd.DataFrame()
-
-for keyword in trendy:
-    keyworded(keyword)
-    
-    # Read the CSV file for the current keyword
-    csv_file = f'{keyword}.csv'
-    if os.path.exists(csv_file):
-        df = pd.read_csv(csv_file)
+    for keyword in trendy:
+        keyworded(keyword)
         
-        # Append the data to the combined DataFrame
-        combined_data = pd.concat([combined_data, df], ignore_index=True)
-        
-        # Delete the individual CSV file
-        os.remove(csv_file)
+        # Read the CSV file for the current keyword
+        csv_file = f'{keyword}.csv'
+        if os.path.exists(csv_file):
+            df = pd.read_csv(csv_file)
+            
+            # Append the data to the combined DataFrame
+            combined_data = pd.concat([combined_data, df], ignore_index=True)
+            
+            # Delete the individual CSV file
+            os.remove(csv_file)
 
-# Save the combined DataFrame to a CSV file in the output folder
-output_file = os.path.join(output_folder, 'combined_data.csv')
-combined_data.to_csv(output_file, index=False)
+    # Save the combined DataFrame to a CSV file in the output folder
+    output_file = os.path.join(output_folder, 'combined_data.csv')
+    combined_data.to_csv(output_file, index=False)
 
-print("Welcome to the awesome interactive EBAY shop!")
+    print("Welcome to the awesome interactive EBAY shop!")
 
-AI()
+    get_response("Who are you?")
+
+main()
