@@ -105,7 +105,7 @@ def do(combined_data=""):
   # response = chat_session.send_message(
   #     f"Here is a pandas dataframe:\n\n{combined_data}\n\nAnalyze and summarize this data:")
   response = chat_session.send_message(
-      f"Here is a csv:\n\n{combined_data}\n\nImagine you are a salesman and you are selling items from a shop that has this inventory. The user's question is '{input()}'")
+      f"{'Here is a csv: ' if combined_data!='' else ''}{combined_data}\n\nImagine you are a salesman and you are selling items from a shop that has this inventory. The user's question is '{input()}'")
 
 
   print(response.text)

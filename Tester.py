@@ -4,18 +4,24 @@ from tqdm import tqdm
 import google.generativeai as genai
 import os
 from AI import *
+from icecream import ic
+# import json
+from files import *
+
 
 s = HTMLSession()
 
 data = []
-d="this is the data:\n"
+bigd="this is the data:\n"
 
 
 def keyworded(keyword):
-    urls = ['https://www.ebay.com/sch/i.html?_from=R40&_nkw={}&_sacat=0&_pgn={}'.format(keyword, x) for x in range(1,5)]
+    d=""
+    urls = ['https://www.ebay.com/sch/i.html?_from=R40&_nkw={}&_sacat=0&_pgn={}'.format(keyword, x) for x in range(1,2)]
     for url in tqdm(urls):
         r = s.get(url)
         content = r.html.find('li.s-item')
+        # print(content)
         for item in tqdm(content):
             title_element = item.find('div.s-item__title', first=True)
             title = title_element.text if title_element else ''
@@ -39,29 +45,36 @@ def keyworded(keyword):
             url = url_element.attrs['href'] if url_element else ''
 
             # data.append([title, subtitle, price, discountprice, shippingprice, shippingfrom, url])
-            d+=f"title of item: {title}\tprice of item {price}\tthe url is '{url}'"
+            d+=f"{title}:\tprice: {price}\n"
 
         # df = pd.DataFrame(data, columns=['Title', 'Sub Title', 'Price', 'Discount Price', 'Shipping Price', 'Shipping From', 'URL'])
         # df.to_csv(f'{keyword}.csv', index=False, mode='a', header=False)
         # data.clear()
+    return d
 
-def main():
+def main(bigd):
+
     genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
     model = genai.GenerativeModel('gemini-1.5-pro')
 
-    trendy = ['iphone', 'samsung']
+    # if input("do u want my load? (y/n) ").lower() == "y":
+    #     load_json_file(input("what file?"))
+    # else:
+
+    # trendy = ['phones', 'laptop', 'headphones']
+    trendy=[input() for i in range(int(input("how many keywords?  ")))]
     # Create a folder to store the combined CSV file
     output_folder = os.path.join(os.getcwd(), 'output_data')
     os.makedirs(output_folder, exist_ok=True)
 
-    # # Initialize an empty DataFrame to store the combined data
-    # combined_data = pd.DataFrame()
+    # Initialize an empty DataFrame to store the combined data
+    combined_data = pd.DataFrame()
 
-    # for keyword in trendy:
-    #     keyworded(keyword)
+    for keyword in trendy:
+        bigd+=keyworded(keyword)
         
     #     #I don't know how to fix it because it should work
-       
+    
     #     # Read the CSV file for the current keyword
     #     csv_file = f'{keyword}.csv'
     #     if os.path.exists(csv_file):
@@ -80,8 +93,11 @@ def main():
     print("Welcome to the awesome interactive EBAY shop!")
 
     # get_response("Who are you?")
-    print(d)
+    ic(bigd)
+    save_string_as_json(bigd, input("what is the name: "))
+    i=0
     while 1:
-        do(d)
+        i+=1
+        do(bigd if i==1 else "")
 
-main() 
+main(bigd) 
