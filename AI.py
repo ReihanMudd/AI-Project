@@ -1,5 +1,6 @@
 import os
 import google.generativeai as genai
+from Tester import combined_data
 
 genai.configure(api_key=["AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg"])
 
@@ -84,7 +85,7 @@ chat_session = model.start_chat(
       "parts": [
         "That's a great idea! I can definitely use your past purchases to recommend some exciting new items. Let's see... based on your previous interest in [list of products], you might like:\n\n**[Product recommendations based on purchase history]**\n\n*  [Product 1] -  [Brief description of the product and why it might appeal to the user]\n*  [Product 2] - [Brief description of the product and why it might appeal to the user]\n*  [Product 3] - [Brief description of the product and why it might appeal to the user]\n\n**Current Promotions and Discounts**\n\nIt looks like we have some exciting deals happening right now that you might be interested in:\n\n*  **[Promotion 1]:** [Brief description of the promotion and relevant products]\n*  **[Promotion 2]:** [Brief description of the promotion and relevant products] \n\nLet me know if you have any questions about the recommendations or deals. I'm here to help you find the perfect items! \n",
       ],
-    },
+    }
   ]
 )
 
@@ -93,3 +94,11 @@ def get_response(input_text):
   
   print(response.text)
 
+response = genai.generate_text(
+    model="gemini-pro",
+    prompt=f"Here is a pandas dataframe:\n\n{combined_data}\n\nAnalyze and summarize this data:",
+    temperature=0.7,
+    max_output_tokens=500
+)
+
+print(response.result)

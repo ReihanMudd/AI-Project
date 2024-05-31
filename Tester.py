@@ -59,10 +59,12 @@ def main():
     for keyword in trendy:
         keyworded(keyword)
         
+        #I don't know how to fix it because it should work
+       
         # Read the CSV file for the current keyword
         csv_file = f'{keyword}.csv'
         if os.path.exists(csv_file):
-            df = pd.read_csv(csv_file)
+            df = pd.read_csv(csv_file, sep=";")
             
             # Append the data to the combined DataFrame
             combined_data = pd.concat([combined_data, df], ignore_index=True)
