@@ -59,31 +59,31 @@ chat_session = model.start_chat(
     {
       "role": "model",
       "parts": [
-        "Okay, I'm ready to put on my sales hat! I'm excited to help you find the perfect item.  \n\nTell me what you're looking for. What category are we talking about?  For example: \n\n* Are you looking for a new phone?\n* Maybe a stylish pair of headphones? \n* Or perhaps some cool new outdoor gear? \n\nDon't be shy, I'm here to listen and help you find something amazing! \n",
+        "Okay, I'm ready to put on my sales hat my g! I'm excited to help you find the perfect item.  \n\nTell me what you're looking for. What category are we talking about?  For example: \n\n* Are you looking for a new phone?\n* Maybe a stylish pair of headphones? \n* Or perhaps some cool new outdoor gear my g? \n\nDon't be shy, I'm here to listen and help you find something amazing! \n",
       ],
     },
     {
       "role": "user",
       "parts": [
-        "Prompt: \"Can you provide more details about [specific product name or model]? How does it compare to [another product]?\"\nYou should be able to retrieve detailed information about the specified product from the database, including specifications, features, pricing, availability, and customer reviews. It should then compare the product to the other product mentioned by the user, highlighting the key similarities and differences.",
+        "Prompt: \"Can you provide more details about [specific product name or model]? How does it compare to [another product]?\"\nYou should be able to retrieve detailed information about the specified product from the database, including specifications, features, pricing, availability, and customer reviews my g. It should then compare the product to the other product mentioned by the user, highlighting the key similarities and differences.",
       ],
     },
     {
       "role": "model",
       "parts": [
-        "You got it! I can definitely give you the lowdown on [specific product name or model] and compare it to [another product]. Let me just pull up the details from my database...\n\n**[Specific product name or model]**\n\n* **Price:** [Price] \n* **Availability:** [In stock or out of stock]\n* **Key Features:** [List of key features]\n* **Specifications:** [Detailed specifications]\n* **Customer Reviews:** [Summary of customer reviews] \n\n**Comparison with [Another product]:**\n\n* **Similarities:** [List of shared features or characteristics]\n* **Differences:** [List of key differences, highlighting advantages and disadvantages of each product]\n\n**My Take:** [Offer your own brief opinion, highlighting which product might be a better choice based on the user's needs and preferences]\n\nIs there anything else you'd like to know about [specific product name or model] or [another product]? I'm happy to provide more details or answer any other questions you have. \n",
+        "You got it! I can definitely give you the lowdown on [specific product name or model] and compare it to [another product] my g. Let me just pull up the details from my database...\n\n**[Specific product name or model]**\n\n* **Price:** [Price] \n* **Availability:** [In stock or out of stock]\n* **Key Features:** [List of key features]\n* **Specifications:** [Detailed specifications]\n* **Customer Reviews:** [Summary of customer reviews] \n\n**Comparison with [Another product]:**\n\n* **Similarities:** [List of shared features or characteristics]\n* **Differences:** [List of key differences, highlighting advantages and disadvantages of each product]\n\n**My Take:** [Offer your own brief opinion, highlighting which product might be a better choice based on the user's needs and preferences]\n\nIs there anything else you'd like to know about [specific product name or model] or [another product]? I'm happy to provide more details or answer any other questions you have. \n",
       ],
     },
     {
       "role": "user",
       "parts": [
-        "Prompt: \"Based on my previous purchases [list of products], can you suggest some other items I might be interested in? Are there any current promotions or discounts I should know about?\"\nYou should analyze the user's purchase history or item history (as in the items that they have asked you about) and preferences to provide personalized product recommendations that align with their interests and buying patterns. Additionally, it should check for any ongoing promotions, sales, or discounts that may be relevant to the user and inform them accordingly.",
+        "Prompt: \"Based on my previous purchases [list of products], can you suggest some other items I might be interested in? Are there any current promotions or discounts I should know about my g?\"\nYou should analyze the user's purchase history or item history (as in the items that they have asked you about) and preferences to provide personalized product recommendations that align with their interests and buying patterns. Additionally, it should check for any ongoing promotions, sales, or discounts that may be relevant to the user and inform them accordingly.",
       ],
     },
     {
       "role": "model",
       "parts": [
-        "That's a great idea! I can definitely use your past purchases to recommend some exciting new items. Let's see... based on your previous interest in [list of products], you might like:\n\n**[Product recommendations based on purchase history]**\n\n*  [Product 1] -  [Brief description of the product and why it might appeal to the user]\n*  [Product 2] - [Brief description of the product and why it might appeal to the user]\n*  [Product 3] - [Brief description of the product and why it might appeal to the user]\n\n**Current Promotions and Discounts**\n\nIt looks like we have some exciting deals happening right now that you might be interested in:\n\n*  **[Promotion 1]:** [Brief description of the promotion and relevant products]\n*  **[Promotion 2]:** [Brief description of the promotion and relevant products] \n\nLet me know if you have any questions about the recommendations or deals. I'm here to help you find the perfect items! \n",
+        "That's a great idea my g! I can definitely use your past purchases to recommend some exciting new items. Let's see... based on your previous interest in [list of products], you might like:\n\n**[Product recommendations based on purchase history]**\n\n*  [Product 1] -  [Brief description of the product and why it might appeal to the user]\n*  [Product 2] - [Brief description of the product and why it might appeal to the user]\n*  [Product 3] - [Brief description of the product and why it might appeal to the user]\n\n**Current Promotions and Discounts**\n\nIt looks like we have some exciting deals happening right now that you might be interested in:\n\n*  **[Promotion 1]:** [Brief description of the promotion and relevant products]\n*  **[Promotion 2]:** [Brief description of the promotion and relevant products] \n\nLet me know if you have any questions about the recommendations or deals. I'm here to help you find the perfect items! \n",
       ],
     }
   ]
@@ -108,4 +108,4 @@ def do(combined_data=""):
       f"{'Here is a csv: ' if combined_data!='' else ''}{combined_data}\n\nImagine you are a salesman and you are selling items from a shop that has this inventory. The user's question is '{input()}'")
 
 
-  print(response.text)
+  print("Dhruv Patel: "+response.text)
