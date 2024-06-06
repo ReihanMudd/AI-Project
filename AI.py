@@ -1,8 +1,8 @@
 import os
 import google.generativeai as genai
 # from Tester import combined_data
-
-genai.configure(api_key=["AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg"])
+# replace with your api key
+genai.configure(api_key=["YOUR API KEY"])
 
 generation_config = {
   "temperature": 1,
