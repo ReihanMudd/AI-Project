@@ -53,8 +53,8 @@ def keyworded(keyword):
     return d
 
 def main(bigd):
-
-    genai.configure(api_key="AIzaSyAp1Xt0TNgKXwu_ll8rigDiAFRipu0QBVg")
+    #replace with your api key
+    genai.configure(api_key="YOUR API KEY")
     model = genai.GenerativeModel('gemini-1.5-pro')
 
     # if input("do u want my load? (y/n) ").lower() == "y":
